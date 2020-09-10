@@ -43,6 +43,7 @@ func NewGreeterEndpoints() []*api.Endpoint {
 
 type GreeterService interface {
 	Hello(ctx context.Context, in *HelloRequest, opts ...client.CallOption) (*HelloResponse, error)
+	NextHello(ctx context.Context, in *HelloRequest, opts ...client.CallOption) (*HelloResponse, error)
 }
 
 type greeterService struct {
@@ -67,15 +68,27 @@ func (c *greeterService) Hello(ctx context.Context, in *HelloRequest, opts ...cl
 	return out, nil
 }
 
+func (c *greeterService) NextHello(ctx context.Context, in *HelloRequest, opts ...client.CallOption) (*HelloResponse, error) {
+	req := c.c.NewRequest(c.name, "Greeter.NextHello", in)
+	out := new(HelloResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for Greeter service
 
 type GreeterHandler interface {
 	Hello(context.Context, *HelloRequest, *HelloResponse) error
+	NextHello(context.Context, *HelloRequest, *HelloResponse) error
 }
 
 func RegisterGreeterHandler(s server.Server, hdlr GreeterHandler, opts ...server.HandlerOption) error {
 	type greeter interface {
 		Hello(ctx context.Context, in *HelloRequest, out *HelloResponse) error
+		NextHello(ctx context.Context, in *HelloRequest, out *HelloResponse) error
 	}
 	type Greeter struct {
 		greeter
@@ -90,4 +103,8 @@ type greeterHandler struct {
 
 func (h *greeterHandler) Hello(ctx context.Context, in *HelloRequest, out *HelloResponse) error {
 	return h.GreeterHandler.Hello(ctx, in, out)
+}
+
+func (h *greeterHandler) NextHello(ctx context.Context, in *HelloRequest, out *HelloResponse) error {
+	return h.GreeterHandler.NextHello(ctx, in, out)
 }

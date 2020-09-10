@@ -9,20 +9,27 @@ import (
 )
 
 func main() {
-	// 创建一个新的服务
+
 	service := micro.NewService(micro.Name("Greeter.Client"))
-	// 初始化
+
 	service.Init()
 
-	// 创建 Greeter 客户端
+	// 建 Greeter 客户端
 	greeter := proto.NewGreeterService("Greeter", service.Client())
 
-	// 远程调用 Greeter 服务的 Hello 方法
-	rsp, err := greeter.Hello(context.TODO(), &proto.HelloRequest{Name: "学院君"})
+	// 遠程調用 Greeter 服務的 Hello 方法
+	rsp1, err := greeter.Hello(context.TODO(), &proto.HelloRequest{Name: "Jeff"})
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	// 調用 recursive
+	rsp2, err := greeter.NextHello(context.TODO(), &proto.HelloRequest{Name: "Alex"})
 	if err != nil {
 		fmt.Println(err)
 	}
 
 	// Print response
-	fmt.Println(rsp.Greeting)
+	fmt.Println(rsp1.Greeting)
+	fmt.Println(rsp2.Greeting)
 }

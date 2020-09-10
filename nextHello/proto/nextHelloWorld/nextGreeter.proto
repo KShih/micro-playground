@@ -1,9 +1,8 @@
 syntax = "proto3"; 
-package com.foo.service.helloworld;
+package com.foo.service.nexthelloworld;
 
-service Greeter { 
+service NextGreeter { 
   rpc Hello(HelloRequest) returns (HelloResponse) {} // to be implemented in handler
-  rpc NextHello(HelloRequest) returns (HelloResponse) {} // call another service
 }
 
 message HelloRequest { 
