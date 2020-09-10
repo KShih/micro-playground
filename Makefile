@@ -10,10 +10,18 @@ client:
 serv:
 	go run main.go
 
-.PHONY: client-reg
+.PHONY: api-serv
+api-serv:
+	go run api/api.go
+
+.PHONY: api-micro
+api-micro:
+	micro api --handler=api
+
+.PHONY: client-etcd
 client-reg:
 	go run client/client.go client/plugin.go --registry=etcd
 
-.PHONY: serv-reg
+.PHONY: serv-etcd
 serv-reg:
 	go run main.go --registry=etcd
