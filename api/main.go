@@ -7,6 +7,7 @@ import (
 	hello "micro-playground/proto/helloworld"
 	"strings"
 
+	grmon "github.com/bcicen/grmon/agent"
 	api "github.com/micro/go-micro/api/proto"
 	"github.com/micro/go-micro/errors"
 	"github.com/micro/go-micro/v2"
@@ -69,6 +70,7 @@ func (s *Say) NextHello(ctx context.Context, req *api.Request, rsp *api.Response
 }
 
 func main() {
+	grmon.Start()
 	service := micro.NewService(
 		micro.Name("go.micro.api.greeter"), // visit => http://localhost:8080/greeter
 	)
