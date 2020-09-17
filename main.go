@@ -19,7 +19,9 @@ func main() {
 	service.Init()
 
 	proto.RegisterGreeterHandler(service.Server(), &handler.GreeterServiceHandler{
-		NextHelloClient: nextProto.NewNextGreeterService("NextGreeter", service.Client())
+		// call service-B in service-A by client-A
+		// init the handler's Client by instantiating the exist service named "NextGreeter"
+		NextHelloClient: nextProto.NewNextGreeterService("NextGreeter", service.Client()),
 	})
 
 	if err := service.Run(); err != nil {
