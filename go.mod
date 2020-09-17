@@ -3,6 +3,7 @@ module micro-playground
 go 1.13
 
 require (
+	github.com/bcicen/grmon v0.0.0-20190725134940-6c3770b6af49
 	github.com/golang/protobuf v1.4.2
 	github.com/micro/go-micro v1.18.0
 	github.com/micro/go-micro/v2 v2.9.1

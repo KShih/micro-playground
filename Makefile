@@ -16,7 +16,7 @@ api-serv:
 
 .PHONY: api-micro
 api-micro:
-	micro api --handler=api
+	micro api --handler=api --enable_rpc
 
 .PHONY: client-etcd
 client-reg:

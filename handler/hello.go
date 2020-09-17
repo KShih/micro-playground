@@ -14,7 +14,26 @@ type GreeterServiceHandler struct {
 }
 
 func (g *GreeterServiceHandler) Hello(ctx context.Context, req *proto.HelloRequest, rsp *proto.HelloResponse) error {
-	rsp.Greeting = " 你好, " + req.Name
+	var val string
+	x := req
+
+	if x, ok := x.GetValue().(*proto.HelloRequest_Texter); ok {
+		val = x.Texter
+	}
+
+	if x, ok := x.GetValue().(*proto.HelloRequest_Number); ok {
+		val = fmt.Sprintf("%f", x.Number)
+	}
+
+	rsp.Greeting = " 你好, " + req.Name + val
+
+	for _, tag := range req.GetTagList() {
+		rsp.TagResp += tag.GetTableName() + "\n"
+		rsp.TagResp += tag.GetTableName() + "\n"
+		rsp.TagResp += tag.GetTagName() + "\n"
+		rsp.TagResp += tag.GetTagType() + "\n"
+		rsp.TagResp += "-------\n"
+	}
 	return nil
 }
 
@@ -28,3 +47,30 @@ func (g *GreeterServiceHandler) NextHello(ctx context.Context, req *proto.HelloR
 
 	return nil
 }
+
+/*
+{
+	"name":"jeff",
+	"number":2.3,
+	"tagList":[
+		 {
+				"tableName":"tn",
+				"tagName":"tg",
+				"columnName":"cn",
+				"tagType":"tt"
+		 },
+		 {
+				"tableName":"tn",
+				"tagName":"tg",
+				"columnName":"cn",
+				"tagType":"tt"
+		 },
+		 {
+				"tableName":"tn",
+				"tagName":"tg",
+				"columnName":"cn",
+				"tagType":"tt"
+		 }
+	]
+}
+*/

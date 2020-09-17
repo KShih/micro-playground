@@ -8,8 +8,20 @@ service Greeter {
 
 message HelloRequest { 
   string name = 1;
+  oneof value {
+    string texter = 5;
+    double number = 6;
+  }
+  message tag {
+    string tableName = 6;
+    string tagName = 7;
+    string columnName = 8;
+    string tagType = 9;
+  }
+  repeated tag tagList = 10;
 }
 
 message HelloResponse { 
   string greeting = 1;
+  string tagResp = 2;
 }
