@@ -11,6 +11,7 @@ import (
 )
 
 type Hello struct{}
+type SubHello struct{}
 
 // Call is a single request handler called via client.Call or the generated client code
 func (e *Hello) Call(ctx context.Context, req *hello.Request, rsp *hello.Response) error {
@@ -47,4 +48,14 @@ func (e *Hello) PingPong(ctx context.Context, stream hello.Hello_PingPongStream)
 			return err
 		}
 	}
+}
+
+func (e *SubHello) Handle(ctx context.Context, msg *hello.Message) error {
+	log.Info("Handler Received message: ", msg.Say)
+	return nil
+}
+
+func Handler(ctx context.Context, msg *hello.Message) error {
+	log.Info("Function Received message: ", msg.Say)
+	return nil
 }

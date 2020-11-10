@@ -3,7 +3,6 @@ package main
 import (
 	"context"
 	"fmt"
-	"log"
 	"time"
 
 	"github.com/micro/go-micro/v2"
@@ -26,7 +25,7 @@ func main() {
 	for now := range time.Tick(time.Second) {
 		fmt.Println("now: ", now)
 		if err := pub.Publish(context.TODO(), &hello.Message{Say: now.String()}); err != nil {
-			log.Fatal("publish err", err)
+			// log.Fatal("publish err", err)
 		}
 	}
 }
