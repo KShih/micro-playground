@@ -27,13 +27,22 @@ func (g *GreeterServiceHandler) Hello(ctx context.Context, req *proto.HelloReque
 
 	rsp.Greeting = " 你好, " + req.Name + val
 
-	for _, tag := range req.GetTagList() {
-		rsp.TagResp += tag.GetTableName() + "\n"
-		rsp.TagResp += tag.GetTableName() + "\n"
-		rsp.TagResp += tag.GetTagName() + "\n"
-		rsp.TagResp += tag.GetTagType() + "\n"
-		rsp.TagResp += "-------\n"
-	}
+	// for _, tag := range req.GetTagList() {
+	// 	rsp.TagResp += tag.GetTableName() + "\n"
+	// 	rsp.TagResp += tag.GetTableName() + "\n"
+	// 	rsp.TagResp += tag.GetTagName() + "\n"
+	// 	rsp.TagResp += tag.GetTagType() + "\n"
+	// 	rsp.TagResp += "-------\n"
+	// }
+
+	info2 := &proto.Info2{}
+	//info2.ConnectType = &proto.Info2_ConnectString{ConnectString: "resp connectString"}
+	info2.ConnectType = &proto.Info2_DsnNmae{DsnNmae: "DSN_NAME"}
+	//info2.TagList = req.TagList
+	info2.DbType = "INFO2_DB_TYPE"
+
+	rsp.Info = &proto.HelloResponse_Info2{Info2: info2}
+
 	return nil
 }
 

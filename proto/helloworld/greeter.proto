@@ -24,4 +24,36 @@ message HelloRequest {
 message HelloResponse { 
   string greeting = 1;
   string tagResp = 2;
+  oneof info {
+    Info1 info1 = 3;
+    Info2 info2 = 4;
+    Info3 info3 = 5;
+  }
+}
+
+message Info1 {
+  string dbType = 1;
+  //repeated tag tagList =2;
+  oneof connectType{
+    string connectString = 3;
+    string dsnNmae = 4;
+  }
+}
+
+message Info2 {
+  string dbType = 1;
+  //repeated tag tagList =2;
+  oneof connectType{
+    string connectString = 3;
+    string dsnNmae = 4;
+  }
+}
+
+message Info3 {
+  string dbType = 1;
+  //repeated tag tagList =2;
+  oneof connectType{
+    string connectString = 3;
+    string dsnNmae = 4;
+  }
 }
