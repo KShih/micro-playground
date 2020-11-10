@@ -12,7 +12,7 @@ serv:
 
 .PHONY: api-serv
 api-serv:
-	go run api/api.go
+	go run api/main.go
 
 .PHONY: api-micro
 api-micro:
