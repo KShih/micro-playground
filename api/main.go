@@ -8,9 +8,9 @@ import (
 	"strings"
 
 	grmon "github.com/bcicen/grmon/agent"
-	api "github.com/micro/go-micro/api/proto"
 	"github.com/micro/go-micro/errors"
 	"github.com/micro/go-micro/v2"
+	api "github.com/micro/go-micro/v2/api/proto"
 )
 
 type Say struct {

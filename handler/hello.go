@@ -42,6 +42,7 @@ func (g *GreeterServiceHandler) Hello(ctx context.Context, req *proto.HelloReque
 	info2.DbType = "INFO2_DB_TYPE"
 
 	rsp.Info = &proto.HelloResponse_Info2{Info2: info2}
+	fmt.Println(rsp.Greeting)
 
 	return nil
 }
